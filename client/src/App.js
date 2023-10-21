@@ -12,7 +12,7 @@ const TableItem = ({ table, duration }) => {
   const [try5, setTry5] = useState(0);
 
   const init = async () => {
-    const data = await fetch(`http://172.20.10.5:7000/api/get-results/${table.tableId}/?duration=${duration}`);
+    const data = await fetch(`https://robinroulettelive.site/api/get-results/${table.tableId}/?duration=${duration}`);
     const res = await data.json();
     const { results } = res;
 
@@ -62,7 +62,7 @@ function App() {
   const [duration, setDuration] = useState(1);
 
   const init = async () => {
-    const data = await fetch(`http://172.20.10.5:7000/api/get-tables`);
+    const data = await fetch(`https://robinroulettelive.site/api/get-tables`);
     const res = await data.json();
     if (res?.tables) {
       setTables(res.tables);
