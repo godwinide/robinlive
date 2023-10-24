@@ -62,12 +62,17 @@ function App() {
   const [duration, setDuration] = useState(1);
 
   const init = async () => {
-    const data = await fetch(`http://localhost:7619/api/get-tables`);
-    const res = await data.json();
-    if (res?.tables) {
-      setTables(res.tables);
+    try {
+      const data = await fetch(`http://localhost:7619/api/get-tables`);
+      const res = await data.json();
+      if (res?.tables) {
+        setTables(res.tables);
+      }
+      setTimeout(init, 1000);
+    } catch (err) {
+      console.log(err);
+      setTimeout(init, 1000);
     }
-    setTimeout(init, 2000);
   }
 
   useEffect(() => {
