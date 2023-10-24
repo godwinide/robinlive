@@ -13,7 +13,7 @@ const TableItem = ({ table, duration }) => {
 
   const init = async () => {
 
-    const data = await fetch(`http://localhost:7619/api/get-results/${table.tableId}/?duration=${duration}`);
+    const data = await fetch(`https://robinroulettelive.site/api/get-results/${table.tableId}/?duration=${duration}`);
     const res = await data.json();
     const { results } = res;
 
@@ -63,7 +63,7 @@ function App() {
 
   const init = async () => {
     try {
-      const data = await fetch(`http://localhost:7619/api/get-tables`);
+      const data = await fetch(`https://robinroulettelive.site/api/get-tables`);
       const res = await data.json();
       if (res?.tables) {
         setTables(res.tables);
