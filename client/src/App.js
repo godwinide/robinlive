@@ -19,7 +19,7 @@ const TableItem = ({ table, duration }) => {
 
     const twins = results.filter(r => r.resultType == true);
     const tlosses = results.filter(r => r.resultType == false);
-    const firsttry = results.filter(r => r.resultType == true && (r.trialPostion == 1 || r.trialPostion == 0));
+    const firsttry = results.filter(r => r.resultType == true && (r.trialPostion == 1));
     const secondtry = results.filter(r => r.resultType == true && r.trialPostion == 2);
     const thirdtry = results.filter(r => r.resultType == true && r.trialPostion == 3);
     const fourthtry = results.filter(r => r.resultType == true && r.trialPostion == 4);
@@ -59,7 +59,7 @@ const TableItem = ({ table, duration }) => {
 
 function App() {
   const [tables, setTables] = useState([]);
-  const [duration, setDuration] = useState(1);
+  const [duration, setDuration] = useState(0.25);
 
   const init = async () => {
     try {
@@ -86,6 +86,8 @@ function App() {
       <div className="duration-wrap">
         <h3>Select Duration</h3>
         <select value={duration} onChange={e => setDuration(e.target.value)} className="form-select" aria-label="Default select example">
+          <option value="0.5">Last 15 mins</option>
+          <option value="0.25">Last 30 mins</option>
           <option value="1">Last 1hr</option>
           <option value="2">Last 2hrs</option>
           <option value="3">Last 3hrs</option>
