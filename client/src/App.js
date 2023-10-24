@@ -12,14 +12,14 @@ const TableItem = ({ table, duration }) => {
   const [try5, setTry5] = useState(0);
 
   const init = async () => {
-    const data = await fetch(`https://robinroulettelive.site/api/get-results/${table.tableId}/?duration=${duration}`);
+
+    const data = await fetch(`http://localhost:7619/api/get-results/${table.tableId}/?duration=${duration}`);
     const res = await data.json();
     const { results } = res;
 
-
     const twins = results.filter(r => r.resultType == true);
     const tlosses = results.filter(r => r.resultType == false);
-    const firsttry = results.filter(r => r.resultType == true && r.trialPostion == 1);
+    const firsttry = results.filter(r => r.resultType == true && (r.trialPostion == 1 || r.trialPostion == 0));
     const secondtry = results.filter(r => r.resultType == true && r.trialPostion == 2);
     const thirdtry = results.filter(r => r.resultType == true && r.trialPostion == 3);
     const fourthtry = results.filter(r => r.resultType == true && r.trialPostion == 4);
@@ -40,7 +40,7 @@ const TableItem = ({ table, duration }) => {
 
 
   return (
-    totalwins > 0 && totalwins > 0
+    (totalwins > 0 || totallosses > 0)
     &&
     <tr>
       <td>{table.tableName}</td>
@@ -62,7 +62,7 @@ function App() {
   const [duration, setDuration] = useState(1);
 
   const init = async () => {
-    const data = await fetch(`https://robinroulettelive.site/api/get-tables`);
+    const data = await fetch(`http://localhost:7619/api/get-tables`);
     const res = await data.json();
     if (res?.tables) {
       setTables(res.tables);
@@ -95,19 +95,18 @@ function App() {
       </div>
 
       <h3 className="my-4">Stats</h3>
-      <div className='table-wrap table table-striped'>
+      <div className='table table-striped'>
         <table className='table'>
           <thead>
             <tr>
               <th>Table</th>
-              <th>Total Wins</th>
-              <th>Total Losses</th>
-              <th>1st Try</th>
-              <th>2nd Try</th>
-              <th>3rd Try</th>
-              <th>4th Try</th>
-              <th>5th Try</th>
-              <th>6st Try</th>
+              <th>Wins</th>
+              <th>Losses</th>
+              <th>1st confirmation</th>
+              <th>2nd</th>
+              <th>3rd</th>
+              <th>4th</th>
+              <th>5th</th>
             </tr>
           </thead>
           <tbody>
