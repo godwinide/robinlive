@@ -86,8 +86,8 @@ function App() {
       <div className="duration-wrap">
         <h3>Select Duration</h3>
         <select value={duration} onChange={e => setDuration(e.target.value)} className="form-select" aria-label="Default select example">
-          <option value="0.5">Last 15 mins</option>
-          <option value="0.25">Last 30 mins</option>
+          <option value="0.25">Last 15 mins</option>
+          <option value="0.5">Last 30 mins</option>
           <option value="1">Last 1hr</option>
           <option value="2">Last 2hrs</option>
           <option value="3">Last 3hrs</option>
