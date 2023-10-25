@@ -1,8 +1,9 @@
 import './App.css';
 import { useEffect, useState } from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Table } from 'reactstrap'
 
-
-const TableItem = ({ table, duration }) => {
+const TableItem = ({ table, duration, index }) => {
   const [totalwins, setTotalwins] = useState(0);
   const [totallosses, setTotallosses] = useState(0);
   const [try1, setTry1] = useState(0);
@@ -17,13 +18,13 @@ const TableItem = ({ table, duration }) => {
     const res = await data.json();
     const { results } = res;
 
-    const twins = results.filter(r => r.resultType == true);
-    const tlosses = results.filter(r => r.resultType == false);
-    const firsttry = results.filter(r => r.resultType == true && (r.trialPostion == 1));
-    const secondtry = results.filter(r => r.resultType == true && r.trialPostion == 2);
-    const thirdtry = results.filter(r => r.resultType == true && r.trialPostion == 3);
-    const fourthtry = results.filter(r => r.resultType == true && r.trialPostion == 4);
-    const fifthtry = results.filter(r => r.resultType == true && r.trialPostion == 5);
+    const twins = results.filter(r => r.resultType === true);
+    const tlosses = results.filter(r => r.resultType === false);
+    const firsttry = results.filter(r => r.resultType === true && (r.trialPostion === 1));
+    const secondtry = results.filter(r => r.resultType === true && r.trialPostion === 2);
+    const thirdtry = results.filter(r => r.resultType === true && r.trialPostion === 3);
+    const fourthtry = results.filter(r => r.resultType === true && r.trialPostion === 4);
+    const fifthtry = results.filter(r => r.resultType === true && r.trialPostion === 5);
 
     setTotalwins(twins.length);
     setTotallosses(tlosses.length);
@@ -81,7 +82,7 @@ function App() {
 
   return (
     <div className='container'>
-      <h1 className="my-5 text-center">Robin Live Stats</h1>
+      <h1 className="my-5 text-center">Roulette Robin Live</h1>
 
       <div className="duration-wrap">
         <h3>Select Duration</h3>
@@ -102,34 +103,32 @@ function App() {
       </div>
 
       <h3 className="my-4">Stats</h3>
-      <div className='table table-striped'>
-        <table className='table'>
-          <thead>
-            <tr>
-              <th>Table</th>
-              <th>Wins</th>
-              <th>Losses</th>
-              <th>1st confirmation</th>
-              <th>2nd</th>
-              <th>3rd</th>
-              <th>4th</th>
-              <th>5th</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              tables.map(t => (
-                <TableItem table={t} duration={duration} />
-              ))
-            }
-          </tbody>
-        </table>
-        {
-          tables.length === 0 &&
-          <p className='text-center'>No data available</p>
+      <Table striped>
+        <thead>
+          <tr>
+            <th>Table</th>
+            <th>Wins</th>
+            <th>Losses</th>
+            <th>1st</th>
+            <th>2nd</th>
+            <th>3rd</th>
+            <th>4th</th>
+            <th>5th</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            tables.map((t, index) => (
+              <TableItem key={t.id} index={index + 1} table={t} duration={duration} />
+            ))
+          }
+          {
+            tables.length === 0 &&
+            <p className='text-center'>No data available</p>
 
-        }
-      </div>
+          }
+        </tbody>
+      </Table>
     </div>
   );
 }
