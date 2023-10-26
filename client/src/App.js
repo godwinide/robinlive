@@ -34,7 +34,6 @@ const TableItem = ({ table, duration, getTables }) => {
     setTry4(fourthtry.length);
     setTry5(fifthtry.length);
 
-    getTables();
     setTimeout(init, 5000)
   }
 
