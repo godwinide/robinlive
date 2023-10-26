@@ -5,7 +5,7 @@ const router = require("express").Router();
 
 router.get("/get-tables", async (req, res) => {
     try {
-        const tables = await Table.find();
+        const tables = await Table.find().sort({ lastUpdated: 1 });
         return res.status(200).json({
             tables
         });
