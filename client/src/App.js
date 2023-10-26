@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Table } from 'reactstrap'
 
-const TableItem = ({ table, duration, index }) => {
+const TableItem = ({ table, duration, getTables }) => {
   const [totalwins, setTotalwins] = useState(0);
   const [totallosses, setTotallosses] = useState(0);
   const [try1, setTry1] = useState(0);
@@ -34,6 +34,7 @@ const TableItem = ({ table, duration, index }) => {
     setTry4(fourthtry.length);
     setTry5(fifthtry.length);
 
+    getTables();
     setTimeout(init, 5000)
   }
 
@@ -64,7 +65,7 @@ function App() {
   const [tables, setTables] = useState([]);
   const [duration, setDuration] = useState(0.25);
 
-  const init = async () => {
+  const getTables = async () => {
     try {
       const data = await fetch(`https://robinroulettelive.site/api/get-tables`);
       const res = await data.json();
@@ -77,7 +78,7 @@ function App() {
   }
 
   useEffect(() => {
-    init();
+    getTables();
   }, [duration]);
 
   return (
@@ -118,8 +119,10 @@ function App() {
         </thead>
         <tbody>
           {
-            tables.map((t, index) => (
-              <TableItem key={t.id} index={index + 1} table={t} duration={duration} />
+            tables.map((t) => (
+              <TableItem key={t.id} table={t} duration={duration}
+                getTables={getTables}
+              />
             ))
           }
           {
