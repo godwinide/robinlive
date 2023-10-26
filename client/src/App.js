@@ -34,7 +34,7 @@ const TableItem = ({ table, duration, getTables }) => {
     setTry4(fourthtry.length);
     setTry5(fifthtry.length);
 
-    setTimeout(init, 5000)
+    // setTimeout(init, 5000)
   }
 
   useEffect(() => {
