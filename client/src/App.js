@@ -33,6 +33,8 @@ const TableItem = ({ table, duration, index }) => {
     setTry3(thirdtry.length);
     setTry4(fourthtry.length);
     setTry5(fifthtry.length);
+
+    setTimeout(init, 5000)
   }
 
   useEffect(() => {
@@ -69,10 +71,10 @@ function App() {
       if (res?.tables) {
         setTables(res.tables);
       }
-      setTimeout(init, 1000);
+      setTimeout(init, 10000);
     } catch (err) {
       console.log(err);
-      setTimeout(init, 1000);
+      setTimeout(init, 10000);
     }
   }
 
