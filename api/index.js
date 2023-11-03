@@ -21,7 +21,7 @@ router.get("/get-entry", async (req, res) => {
         const entry = await Entry.findOne({ tableName: "Auto-Roulette" }, { sent: false });
         const _entry = { ...entry };
         if (entry) {
-            await Entry.updateMany({}, { sent: true })
+            await Entry.updateMany({ tableName: "Auto-Roulette" }, { sent: true })
             return res.status(200).json({
                 entry: _entry._doc
             });
